@@ -1,0 +1,21 @@
+#MDN
+component 1: mixture weight = 0.0000; mean = 1.8158; variance = 0.0152
+component 2: mixture weight = 0.0000; mean = -0.7806; variance = 1.2150
+component 3: mixture weight = 0.0002; mean = 0.8585; variance = 0.1012
+component 4: mixture weight = 0.0000; mean = -0.1581; variance = 0.0068
+component 5: mixture weight = 0.9998; mean = 0.4853; variance = 0.0825
+component 1: mixture weight = 0.0000; mean = -0.0888; variance = 0.9711
+component 2: mixture weight = 0.0000; mean = -0.2769; variance = 1.6186
+component 3: mixture weight = 0.0002; mean = -0.2804; variance = 1.6301
+component 4: mixture weight = 0.0000; mean = 0.2064; variance = 0.2696
+component 5: mixture weight = 0.9998; mean = 0.5231; variance = 0.0855
+component 1: mixture weight = 0.0000; mean = 0.3156; variance = 0.9495
+component 2: mixture weight = 0.0000; mean = 0.7389; variance = 2.1142
+component 3: mixture weight = 0.0002; mean = 0.7472; variance = 3.0000
+component 4: mixture weight = 0.0000; mean = 0.1384; variance = 3.5884
+component 5: mixture weight = 0.9998; mean = 0.4965; variance = 0.0865
+component 1: mixture weight = 0.0000; mean = 0.9459; variance = 1.5931
+component 2: mixture weight = 0.0000; mean = 0.0156; variance = 4.8713
+component 3: mixture weight = 0.0002; mean = 0.9178; variance = 0.8334
+component 4: mixture weight = 0.0000; mean = 0.3804; variance = 4.1627
+component 5: mixture weight = 0.9998; mean = 0.4444; variance = 0.0014

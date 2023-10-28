@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "/home/MySofa/ext_plugin_repo/SPLIB/src/python3",
+        "/home/MySofa/sofa/build/lib/python3/site-packages",
+        "/home/andrea/.local/lib/python3.8/site-packages"
+    ]
+}

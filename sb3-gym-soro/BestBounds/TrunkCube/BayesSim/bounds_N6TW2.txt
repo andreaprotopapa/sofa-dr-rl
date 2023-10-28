@@ -1,0 +1,26 @@
+# MDNN
+component 1: mixture weight = 0.0000; mean = -2.4172; variance = 5.4919
+component 2: mixture weight = 1.0000; mean = 0.3715; variance = 0.0943
+component 3: mixture weight = 0.0000; mean = 0.1437; variance = 5.8415
+component 4: mixture weight = 0.0000; mean = -2.2850; variance = 1.2654
+component 5: mixture weight = 0.0000; mean = 0.9639; variance = 0.0815
+component 1: mixture weight = 0.0000; mean = -1.0613; variance = 0.0417
+component 2: mixture weight = 1.0000; mean = 0.3746; variance = 0.1074
+component 3: mixture weight = 0.0000; mean = 0.0311; variance = 4.0870
+component 4: mixture weight = 0.0000; mean = 0.0376; variance = 6.6437
+component 5: mixture weight = 0.0000; mean = 0.8652; variance = 2.2405
+component 1: mixture weight = 0.0000; mean = -0.7272; variance = 5.7203
+component 2: mixture weight = 1.0000; mean = 0.6867; variance = 0.1291
+component 3: mixture weight = 0.0000; mean = 0.3100; variance = 5.2863
+component 4: mixture weight = 0.0000; mean = -0.9294; variance = 1.1339
+component 5: mixture weight = 0.0000; mean = 0.6800; variance = 1.7877
+component 1: mixture weight = 0.0000; mean = 1.6926; variance = 7.6608
+component 2: mixture weight = 1.0000; mean = 0.4248; variance = 0.0035
+component 3: mixture weight = 0.0000; mean = 1.0855; variance = 0.8495
+component 4: mixture weight = 0.0000; mean = -0.2991; variance = 1.8648
+component 5: mixture weight = 0.0000; mean = 1.0642; variance = 5.9960
+component 1: mixture weight = 0.0000; mean = 73.1780; variance = 14875.4854
+component 2: mixture weight = 1.0000; mean = 1855.0986; variance = 8167190.5000
+component 3: mixture weight = 0.0000; mean = -1.5905; variance = 7.0192
+component 4: mixture weight = 0.0000; mean = 0.3674; variance = 9.7100
+component 5: mixture weight = 0.0000; mean = 1.3416; variance = 4.1807

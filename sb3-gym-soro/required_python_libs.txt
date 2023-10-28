@@ -1,0 +1,15 @@
+# pip install -r required_python_libs.txt
+numpy
+scipy
+matplotlib
+pandas
+gym
+torch
+wandb
+stable-baselines3
+bayesian-optimization
+gradient-free-optimizers
+nevergrad
+cma
+seaborn
+pyquaternion
