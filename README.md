@@ -1,6 +1,6 @@
 # Training Reinforcement Learning Policies for Soft Robots with Domain Randomization in SOFA Framework
 
-This repository contains the code for the paper "**Domain Randomization for Robust, Affordable and Effective Closed-loop Control of Soft Robots**" (Gabriele Tiboni, Andrea Protopapa, Tatiana Tommasi, Giuseppe Averta), here presented as an easy-to-use extension for SofaGym and SOFA Framework.
+This repository contains the code for the [paper](https://arxiv.org/abs/2303.04136) "**Domain Randomization for Robust, Affordable and Effective Closed-loop Control of Soft Robots**" (Gabriele Tiboni, Andrea Protopapa, Tatiana Tommasi, Giuseppe Averta - IROS2023), here presented as an easy-to-use extension for SofaGym and SOFA Framework.
 
 [Preprint](https://arxiv.org/abs/2303.04136) / [Website](https://andreaprotopapa.github.io/dr-soro/) / [Video](https://andreaprotopapa.github.io/dr-soro/)
 
@@ -25,6 +25,18 @@ are available as an easy-to-use extension of [SofaGym framework](https://github.
 <p align="center">
   <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/670be649-b3fa-4b34-b715-41d4ad8688b4 alt="Offline Adaptive DR paradigm for soft robots." width="700"/>
 </p>
+
+## Table of Contents
+...
+
+## Installation
+### Requirements
+### Prerequisites
+### Install modules
+
+## Quick Start
+
+## Examples
 
 ## Citing
 If you use this repository, please consider citing us:
