@@ -189,8 +189,17 @@ We offer two distinct methods for inferring the dynamics parameters:
 2. **[BayesSim](https://github.com/rafaelpossas/bayes_sim/tree/master)**: This method represents the classical baseline in Domain Randomization, adapted here to the offline inference setting by replaying the original action sequence during data collection.
 
 Both of these methods are accessible within the `sb3-gym-soro/methods` directory.
+As the output, we generate a distribution of the dynamics parameters saved in an `.npy` file. You can refer to the `sb3-gym-soro/BestBounds` directory to access previous inference results that we have made available.
+
 ### 3. Policy Training
+The primary objective of Domain Randomization is to randomly sample new dynamics parameters, denoted as $\xi$, from the distribution $p_\phi(\xi)$ at the beginning of each training episode. If an inference algorithm like *RF-DROPO* or *BayesSim* has been used, then $p_\phi(\xi)$ represents the output from the previous step.
+
+Additionally, we have included another baseline method known as **Uniform Domain Randomization** (**UDR**). Unlike the aforementioned inference-based approaches, UDR does not require an inference step, as $p_\phi(\xi)$ is a uniform distribution that is statically fixed in the randomized configuration file of the environment.
+
+Upon training the agent in the source environment for a specified number of `timesteps`, the optimal policy is obtained as output and is saved in best_model.zip."
+
 ### 4. Evaluation
+For evaluating the goodness of the various methods
 
 ## Examples
 Notes:
