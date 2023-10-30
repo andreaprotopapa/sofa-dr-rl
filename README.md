@@ -38,12 +38,14 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
     * Note: [Plugins installation](https://www.sofa-framework.org/community/doc/plugins/build-a-plugin-from-sources/#in-tree-build) with a in-tree build is preferred.
 
 ### Install modules and requirements
-Mandatory - You need to install python packages and the `sofagym` module for using and testing our framework:
+Our toolkit currently works with `gym` v0.21.0 and `stable-baselines3` v1.6.2.
+
+**Mandatory** - You need to install python packages and the `sofagym` module for using and testing our framework:
 ```
 pip install -r ./required_python_libs.txt
 pip install -e ./sofagym
 ```
-Optionally - If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
+**Optional** - If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
 - **RF-DROPO**
 ```
 pip install -r ./sb3-gym-soro/methods/dropo-dev/required_python_libs.txt
@@ -65,8 +67,8 @@ export PYTHONPATH=<path>/<to>/<python3>/<site-packages>:$PYTHONPATH
 ```
 For example, if you have installed SOFA binaries, you should launch something similar to:
 ```python
-export SOFA_ROOT=/home/andreaprotopapa/SOFA/v22.06.00
-export PYTHONPATH=/home/andreaprotopapa/SOFA/v22.06.00/plugins/SofaPython3/lib/python3/site-packages:$PYTHONPATH
+export PYTHONPATH=~/SOFA/v22.06.00/plugins/SofaPython3/lib/python3/site-packages:$PYTHONPATH
+export SOFA_ROOT=~/SOFA/v22.06.00
 ```
 This software toolkit is organized in two main parts, described as follows:
 - **sb3-gym-soro** contains all the code for RL training algorithms, with the use of Domain Randomization techinques. 
@@ -116,28 +118,115 @@ env.set_dr_training(False)
 ```
 
 ## Details
-### Randomized configuration of the Gym environment
+### 0. Randomized configuration of the Gym environment
+Each Gym environment is defined inside `sofagym`, as an extension of pre-existing enviroments of the [SofaGym](https://github.com/SofaDefrost/SofaGym) API. To allow the use of Domain Randomization techinques, two main steps are required:
+
+1. Augment the simulated environment (e.g., `TrunkEnv.py`) with the following methods to allow Domain Randomization and its optimization:
+  - `env.set_task(*new_task) # Set new dynamics parameters`
+  - `env.get_task() # Get current dynamics parameters`   
+  - `env.get_search_bounds(i) # Get search bounds for a specific parameter optimized`
+  - `env.get_search_bounds_all() # Get search bounds for all the parameters optimized`
+  - `env.get_task_lower_bound(i) # Get lower bound for i-th dynamics parameter`
+  - `env.get_task_upper_bound(i) # Get upper bound for i-th dynamics parameter`
+
+2. Create a randomized configuration (e.g., `Trunk_random_config.json`), where all the details of each dynamics parameter are specified:
+```python
+{
+
+...
+
+"dynamic_params": ["trunkMass", "trunkPoissonRatio", "trunkYoungModulus"],
+"dynamic_params_values": [0.42, 0.45, 4500],
+
+"trunkMass_init": 0.42,
+"trunkMass_min_search": 0.005,
+"trunkMass_max_search": 1.0,
+"trunkMass_lowest": 0.0001,
+"trunkMass_highest": 10000,
+
+...
+}
+```
+  - For each dynamics parameter to be randomized, set:
+    - the name (inside `dynamic_params`)
+    - the target value (inside `dynamic_params_values`)
+    - the initial value (`_init`)
+    - the search bounds (`_min_search` and `_max_search`)
+    - the physical bounds (`_lowest` and `_highest`)
+
 ### 1. Dataset collection and formatting
 ### 2. Dynamics Parameters Inference
 ### 3. Policy Training
 ### 4. Evaluation
 
 ## Examples
+Notes:
+- Each of the following examples should be executed within the training directory `sb3-gym-soro`. Therefore, please ensure that you change the current working directory to this location (i.e., `cd sb3-gym-soro`).
+- Our toolkit is integrated with `wandb`. If you wish to use it, remember to log in beforehand and include the corresponding option in the command (i.e., `--wandb_mode online`).
+- To parallelize the inference or policy training execution, use the dedicated `--now` parameter.
+- Please note that both the *inference* phase and *policy training* are relatively time-consuming experiments required to reach convergence. If you are primarily interested in our results, you can quickly evaluate some pre-trained policies that we have made available in the `sb3-gym-soro/example-results` directory or following the commands reported in **Evaluation**.
+  - During the evaluation of a learned policy, it is possible to visualize the execution of the task with the option `--test_render`.
+- Additionally, the datasets and distributions of dynamics parameters that have already been inferred are provided in the `sb3-gym-soro/Dataset` and `sb3-gym-soro/BestBounds` directories, respectively.
 ### TrunkReach
-- Inference 
-- Policy Training
-- Evaluation
+For this task, we offer various methods for training with Domain Randomization, including *RF-DROPO* (our method), *BayesSim*, and *UDR*. To keep it simple, we will provide example commands for *RF-DROPO* here. However, you can refer to the in-code documentation of each method if you wish to try them as well.
+- **Inference**
+  - Dataset is here collected by executing a set of 100 random actions before the inference phase.
+  - ```
+    python train_dropo.py --env trunk-v0 --test_env trunk-v0 --seed 0 --now 1 -n 1 --budget 5000 --data random --clipping 100 --inference_only --run_path ./runs/RFDROPO --wandb_mode disabled
+    ```
+- **Policy Training**
+  - Inference bounds (i.e., the dynamics parameters distributions) have here already been determined in a previous inference step and are simply loaded.
+  - ```
+    python train_dropo.py --env trunk-v0 --test_env trunk-v0 --seed 0 --now 1 -t 2000000  --training_only --run_path ./runs/RFDROPO --bounds_path ./BestBounds/Trunk/RFDROPO/seed0_8CK3V_best_phi.npy --wandb_mode disabled
+    ```
+- **Evaluation** (suggested for an out-of-the-box testing)
+  - A control policy has here already been trained in a previous policy training step and is simply loaded.
+  - ```
+    python test.py --test_env trunk-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunk/RFDROPO/2023_02_28_20_31_32_trunk-v0_ppo_t2000000_seed2_login027851592_TM84F --test_render
+    ```
 ### TrunkPush
-- Inference 
-- Policy Training
-- Evaluation
+- For this task, it is also possible to train on an unmodeled setting, by using the option `--unmodeled`, which referers to the use of a different randomized configuration file (i.e., `TrunkCube_random_unmodeled_config.json`).
+- **Inference**
+  -  Dataset has here been pre-collected by a semi-converged policy and is simply loaded.
+  - ```
+    python train_dropo.py --env trunkcube-v0 --test_env trunkcube-v0  --seed 0 --now 1 -eps 1.0e-4 -n 1 --budget 5000 --data custom --data_path ./Dataset/TrunkCube/20230208-091408_1episodes.npy --inference_only --run_path ./runs/RFDROPO --wandb_mode disabled
+    ```
+- **Policy Training**
+  - Inference bounds (i.e., the dynamics parameters distributions) have here already been determined in a previous inference step and are simply loaded.
+  - ```
+    python train_dropo.py --env trunkcube-v0 --test_env trunkcube-v0 --seed 0 --now 1 -t 2000000  --training_only --run_path ./runs/RFDROPO --bounds_path ./BestBounds/TrunkCube/RFDROPO/bounds_A1S0X.npy --wandb_mode disabled
+    ```
+- **Evaluation** (suggested for an out-of-the-box testing)
+  - A control policy has here already been trained in a previous policy training step and is simply loaded.
+  - ```
+    python test.py --test_env trunkcube-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunkcube/RFDROPO/2023_07_10_11_34_58_trunkcube-v0_ppo_t2000000_seed1_7901a3c94a22_G0QXG --test_render
+    ```
 ### TrunkLift 
-- Policy Training - fixed DR
-- Evaluation
+- For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomizing the wall position during training (as defined in the corresponding `TrunkWall_random_config.json`). Read more in Sec. V-D of our [work](https://arxiv.org/abs/2303.04136) for further details.
+- **Policy Training - fixed DR**
+- ```
+    python train.py --env trunkwall-v0 --algo ppo --now 1 --seed 0 -t 2000000 --run_path ./runs/trunkwall --wandb_mode disabled
+    ```
+- **Evaluation** (suggested for an out-of-the-box testing)
+  - A control policy has here already been trained in a previous policy training step and is simply loaded.
+  - ```
+    python test.py --test_env trunkwall-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunkwall/2023_02_26_20_46_59_trunkwall-v0_ppo_t2000000_seed3_mn011935323_R922D --test_render
+    ```
 ### Multigait 
-- Policy Training - fixed DR
-- Evaluation
-
+- For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomization (as defined in the corresponding `MultiGaitRobot_random_config.json`) during training using a simplified model
+to then evaluate the performance on a more complex version of model.
+  - We found that Domain Randomization is effective in enhancing robustness during training. This approach allows us to reduce the training time by utilizing simplified models for training while still achieving successful transfer of learned behavior to more accurate models during evaluation.
+  - Read more in Sec. V-C of our [work](https://arxiv.org/abs/2303.04136) for further details.
+- **Policy Training - fixed DR**
+- ```
+    python train_fixed_dr.py --env multigaitrobot-v0 --test_env multigaitrobot-v0 --eval_freq 12000 --seed 0 --now 1 -t 500000 --run_path ./runs/multigait --bounds_path ./BestBounds/MultiGait/gauss_bounds.npy --distribution_type truncnorm --wandb_mode disabled
+    ```
+- **Evaluation** (suggested for an out-of-the-box testing)
+  - A control policy has here already been trained in a previous policy training step and is simply loaded.
+  - It is possible to observe how the policy performs in both simplified and complex models by simply adjusting the value of the `reduced` attribute in the `MultiGaitRobot_random_config.json` file.
+  - ```
+    python test.py --test_env multigaitrobot-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/multigait/2023_02_07_08_37_02_multigaitrobot-v0_ppo_t341000_seed1_hactarlogin358482_X54NP --test_render
+    ```
 ## Citing
 If you use this repository, please consider citing us:
 
