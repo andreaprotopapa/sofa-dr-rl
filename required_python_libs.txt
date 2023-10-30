@@ -22,3 +22,4 @@ pygame
 glfw
 pyopengl
 imageio
+imageio-ffmpeg
