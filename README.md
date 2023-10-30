@@ -38,32 +38,36 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
     * Note: [Plugins installation](https://www.sofa-framework.org/community/doc/plugins/build-a-plugin-from-sources/#in-tree-build) with a in-tree build is preferred.
 
 ### Install modules and requirements
-Mandatory:
-- You need both modules for using and testing our framework
-- **Install sofagym**
+Mandatory - You need to install python packages and the `sofagym` module for using and testing our framework:
 ```
-pip install -r sofagym/required_python_libs.txt
+pip install -r ./required_python_libs.txt
 pip install -e ./sofagym
 ```
-- **Install sb3-gym-soro**
-```
-pip install -r sb3-gym-soro/required_python_libs.txt
-pip install -e ./sb3-gym-soro
-```
-Optionally:
-- If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
+Optionally - If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
 - **RF-DROPO**
 ```
-pip install -r sb3-gym-soro/methods/dropo-dev/required_python_libs.txt
-pip install -e ./sb3-gym-soro/methods/dropo-dev/
+pip install -r ./sb3-gym-soro/methods/dropo-dev/required_python_libs.txt
+pip install -e ./sb3-gym-soro/methods/dropo-dev
 ```
 - **BayesSim**
 ```
-pip install -r sb3-gym-soro/methods/bayessim-replay/required_python_libs.txt
-pip install -e ./sb3-gym-soro/methods/bayessim-replay/
+pip install -r ./sb3-gym-soro/methods/bayessim-replay/delfi/required_python_libs.txt
+pip install -e ./sb3-gym-soro/methods/bayessim-replay/delfi
+pip install -r ./sb3-gym-soro/methods/bayessim-replay/required_python_libs.txt
+pip install -e ./sb3-gym-soro/methods/bayessim-replay
 ```
 
 ## Quick Start
+To make SofaGym able to run SOFA, you need to set some enviromental variables:
+```python
+export SOFA_ROOT=<path>/<to>/<sofa>/<build>
+export PYTHONPATH=<path>/<to>/<python3>/<site-packages>:$PYTHONPATH
+```
+For example, if you have installed SOFA binaries, you should launch something similar to:
+```python
+export SOFA_ROOT=/home/andreaprotopapa/SOFA/v22.06.00
+export PYTHONPATH=/home/andreaprotopapa/SOFA/v22.06.00/plugins/SofaPython3/lib/python3/site-packages:$PYTHONPATH
+```
 
 ## Examples
 
