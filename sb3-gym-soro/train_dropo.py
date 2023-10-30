@@ -3,7 +3,7 @@
   Example:
 
     [Inference] python train_dropo.py --env trunkcube-v0 --test_env trunkcube-v0 -n 1 --budget 5000 --now 1 --data custom --data_path ./Dataset/TrunkCube/20230208-091408_1episodes.npy --inference_only --run_path ./runs/RFDROPO --seed 0 -eps 1.0e-4 --wandb_mode disabled
-    [Training]  python train_dropo.py --env trunkcube-v0 --test_env trunkcube-v0 --seed 0 --now 1 -t 2000000 --run_path ./runs/RFDROPO/ --training_only --bounds_path ./BestBounds/TrunkCube/RFDROPO/bounds_A1S0X.npy --wandb_mode disabled
+    [Training]  python train_dropo.py --env trunkcube-v0 --test_env trunkcube-v0 --seed 0 --now 1 -t 2000000 --run_path ./runs/RFDROPO --training_only --bounds_path ./BestBounds/TrunkCube/RFDROPO/bounds_A1S0X.npy --wandb_mode disabled
 
 """
 

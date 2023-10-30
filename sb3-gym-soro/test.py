@@ -2,10 +2,10 @@
 
   Examples:
     
-    [Trunk]     python test.py --test_env trunk-v0 --test_episodes 1 --seed 0 --algo ppo --offline --load_path ./example-results/trunk/RFDROPO/2023_02_28_20_31_32_trunk-v0_ppo_t2000000_seed2_login027851592_TM84F --test_render
-    [TrunkCube] python test.py --test_env trunkcube-v0 --test_episodes 1 --seed 0 --algo ppo --offline --load_path ./example-results/trunkcube/RFDROPO/2023_07_10_11_34_58_trunkcube-v0_ppo_t2000000_seed1_7901a3c94a22_G0QXG --test_render
-    [TrunkWall] python test.py --test_env trunkwall-v0 --test_episodes 1 --seed 0 --algo ppo --offline --load_path ./example-results/trunkwall/2023_02_26_20_46_59_trunkwall-v0_ppo_t2000000_seed3_mn011935323_R922D --test_render
-    [Multigait] python test.py --test_env multigaitrobot-v0 --test_episodes 1 --seed 0 --algo ppo --offline --load_path ./example-results/multigait/2023_02_07_08_37_02_multigaitrobot-v0_ppo_t341000_seed1_hactarlogin358482_X54NP --test_render
+    [Trunk]     python test.py --test_env trunk-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunk/RFDROPO/2023_02_28_20_31_32_trunk-v0_ppo_t2000000_seed2_login027851592_TM84F --test_render
+    [TrunkCube] python test.py --test_env trunkcube-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunkcube/RFDROPO/2023_07_10_11_34_58_trunkcube-v0_ppo_t2000000_seed1_7901a3c94a22_G0QXG --test_render
+    [TrunkWall] python test.py --test_env trunkwall-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunkwall/2023_02_26_20_46_59_trunkwall-v0_ppo_t2000000_seed3_mn011935323_R922D --test_render
+    [Multigait] python test.py --test_env multigaitrobot-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/multigait/2023_02_07_08_37_02_multigaitrobot-v0_ppo_t341000_seed1_hactarlogin358482_X54NP --test_render
 
 
 """
