@@ -38,12 +38,14 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
     * Note: [Plugins installation](https://www.sofa-framework.org/community/doc/plugins/build-a-plugin-from-sources/#in-tree-build) with a in-tree build is preferred.
 
 ### Install modules and requirements
-Mandatory - You need to install python packages and the `sofagym` module for using and testing our framework:
+Our toolkit currently works with `gym` v0.21.0 and `stable-baselines3` v1.6.2.
+
+**Mandatory** - You need to install python packages and the `sofagym` module for using and testing our framework:
 ```
 pip install -r ./required_python_libs.txt
 pip install -e ./sofagym
 ```
-Optionally - If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
+**Optional** - If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
 - **RF-DROPO**
 ```
 pip install -r ./sb3-gym-soro/methods/dropo-dev/required_python_libs.txt
@@ -116,7 +118,42 @@ env.set_dr_training(False)
 ```
 
 ## Details
-### Randomized configuration of the Gym environment
+### 0. Randomized configuration of the Gym environment
+Each Gym environment is defined inside `sofagym`, as an extension of pre-existing enviroments of the [SofaGym](https://github.com/SofaDefrost/SofaGym) API. To allow the use of Domain Randomization techinques, two main steps are required:
+
+1. Augment the simulated environment (e.g., `TrunkEnv.py`) with the following methods to allow Domain Randomization and its optimization:
+  - `env.set_task(*new_task) # Set new dynamics parameters`
+  - `env.get_task() # Get current dynamics parameters`   
+  - `env.get_search_bounds(i) # Get search bounds for a specific parameter optimized`
+  - `env.get_search_bounds_all() # Get search bounds for all the parameters optimized`
+  - `env.get_task_lower_bound(i) # Get lower bound for i-th dynamics parameter`
+  - `env.get_task_upper_bound(i) # Get upper bound for i-th dynamics parameter`
+
+2. Create a randomized configuration (e.g., `Trunk_random_config.json`), where all the details of each dynamics parameter are specified:
+```python
+{
+
+...
+
+"dynamic_params": ["trunkMass", "trunkPoissonRatio", "trunkYoungModulus"],
+"dynamic_params_values": [0.42, 0.45, 4500],
+
+"trunkMass_init": 0.42,
+"trunkMass_min_search": 0.005,
+"trunkMass_max_search": 1.0,
+"trunkMass_lowest": 0.0001,
+"trunkMass_highest": 10000,
+
+...
+}
+```
+  - For each dynamics parameter to be randomized, set:
+    - the name (inside `dynamic_params`)
+    - the target value (inside `dynamic_params_values`)
+    - the initial value (`_init`)
+    - the search bounds (`_min_search` and `_max_search`)
+    - the physical bounds (`_lowest` and `_highest`)
+
 ### 1. Dataset collection and formatting
 ### 2. Dynamics Parameters Inference
 ### 3. Policy Training
