@@ -12,3 +12,10 @@ pycache
 Results_benchmark/*
 sofagym/env/Results/*
 */.vscode
+*/src/logs
+*.pyc
+.idea/
+.ipynb_checkpoints/
+bayes_sim.egg-info/
+todo.txt
+*.sh
