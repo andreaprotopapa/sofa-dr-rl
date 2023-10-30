@@ -188,7 +188,7 @@ We offer two distinct methods for inferring the dynamics parameters:
 
 2. **[BayesSim](https://github.com/rafaelpossas/bayes_sim/tree/master)**: This method represents the classical baseline in Domain Randomization, adapted here to the offline inference setting by replaying the original action sequence during data collection.
 
-Both of these methods are accessible within the `sb3-gym-soro/methods directory`.
+Both of these methods are accessible within the `sb3-gym-soro/methods` directory.
 ### 3. Policy Training
 ### 4. Evaluation
 
