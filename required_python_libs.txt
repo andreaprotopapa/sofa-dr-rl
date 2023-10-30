@@ -3,13 +3,13 @@ numpy
 scipy
 matplotlib
 pandas
-gym
+gym==0.21.0
 torch
 wandb
-stable-baselines3
+stable-baselines3==1.6.2
 bayesian-optimization
 gradient-free-optimizers
-nevergrad
+nevergrad==0.11.0
 cma
 seaborn
 pyquaternion

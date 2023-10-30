@@ -8,6 +8,7 @@ runs/
 */results/
 */multigaitrobot-v0/
 */test/
+sb3-gym-soro/example-results/*
 */pycache
 */Results_benchmark/*
 sofagym/env/Results/*
