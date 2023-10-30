@@ -13,3 +13,10 @@ nevergrad
 cma
 seaborn
 pyquaternion
+
+# for sofagym
+psutil
+pygame
+glfw
+pyopengl
+imageio
