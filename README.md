@@ -73,6 +73,11 @@ This software toolkit is organized in two main parts, described as follows:
 Work inside this directory for any experiment and test.
 - **sofagym** contains the API provided by [SofaGym](https://github.com/SofaDefrost/SofaGym) for creating standard Gym enviroments for Soft Robots interfaced with the SOFA simulator. This toolkit has been extended for integrating Domain Randomization techinques.
 
+Test this implementation on the *TrunkCube* Gym environment with `sb3-gym-soro/test.py`. This script shows the result of a trained policy using RF-DROPO as DR method for the *TrunkPush* task.
+```
+cd sb3-gym-soro
+python test.py --test_env trunkcube-v0 --offline --test_render
+```
 See below for more examples on testing the toolkit, in the [Examples section](https://github.com/andreaprotopapa/sofa-dr-rl/tree/main#examples).
 
 ### Features
@@ -110,7 +115,27 @@ env.set_dr_training(False)
 # ... evaluate policy in non-randomized env
 ```
 
+## Details
+### Randomized configuration of the Gym environment
+### Inference
+### Policy Training
+### Evaluation
+
 ## Examples
+### TrunkReach
+Inference 
+Policy Training
+Evaluation
+### TrunkPush
+Inference 
+Policy Training
+Evaluation
+### TrunkLift 
+Policy Training - fixed DR
+Evaluation
+### Multigait 
+Policy Training - fixed DR
+Evaluation
 
 ## Citing
 If you use this repository, please consider citing us:
