@@ -1,0 +1,6 @@
+# pip install -r required_python_libs.txt
+scikit-learn
+seaborn
+tensorflow
+tensorflow-probability
+ghalton

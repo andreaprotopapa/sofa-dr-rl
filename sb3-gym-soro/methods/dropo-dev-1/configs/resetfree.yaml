@@ -1,0 +1,4 @@
+---
+n_trajectories: 1
+clip_episode_length: 100
+clip_state: null            # int : number of trunk ref points to subsample

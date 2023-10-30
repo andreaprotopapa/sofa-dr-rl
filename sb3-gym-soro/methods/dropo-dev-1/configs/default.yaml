@@ -1,0 +1,25 @@
+---
+config: null                        # .yaml config file
+name: null                          # wandb run name
+group: null                         # wandb group name
+notes: null                         # wandb notes
+debug: false                        # Debug flag. If true, wandb is not used.
+
+env: RandomHopper-v0                # Gym env to use
+dataset: datasets/hopper            # Specify directory containing a custom dataset to use.
+
+additive_variance: true             # RECOMMENDED. Add value --epsilon to the diagonal of the cov_matrix to regularize the next-state distribution inference
+normalize: true                     # RECOMMENDED. Normalize dynamics search space to [0,4] as a regularization for CMA-ES.
+logstdevs: true                     # RECOMMENDED. Optimize stdevs in log space
+n_trajectories: 1                   # Number of target trajectories in the target dataset to consider
+epsilon: 1.0e-3                     # RECOMMENDED. Epsilon hyperparameter. Valid only when --additive_variance is set (default: 1e-3)
+scaling: false                      # Scaling each state dimension
+sample_size: 100                    # Number of observations to sample to estimate the next-state distribution (Default: 100)
+clip_episode_length: null           # If set, clip episode length to this value.
+temperatureRegularization: false    # Start with a single transition, then consider a longer-time horizon as CMA converges.
+
+budget: 1000                        # Number of evaluations in the opt. problem (Default: 1000)
+now: 1                              # Number of workers for parallelization (Default: 1 => no parallelization)
+output_dir: runs                    # Output directory for results
+no_output: false                    # If set, DO NOT save the output of optimization problem to output_dir
+seed: 0                             # Set a specific seed

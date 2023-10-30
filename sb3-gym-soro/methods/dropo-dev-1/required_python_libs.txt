@@ -1,0 +1,3 @@
+numpy
+nevergrad==0.11.0
+gym==0.21.0
