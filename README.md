@@ -16,7 +16,11 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
 </p>
 
 ## Table of Contents
-...
+1. [Installation](#installation)
+2. [Quick Start](#quick-start)
+3. [Details](#details)
+4. [Examples](#examples)
+5. [Citing](#citing)
 
 ## Installation
 ### Requirements
