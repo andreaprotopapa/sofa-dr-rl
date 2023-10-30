@@ -155,7 +155,40 @@ Each Gym environment is defined inside `sofagym`, as an extension of pre-existin
     - the physical bounds (`_lowest` and `_highest`)
 
 ### 1. Dataset collection and formatting
+Prior to running the code for the *inference* phase, an offline dataset of trajectories from the target (real) environment needs to be collected. This dataset can be generated either by rolling out any previously trained policy, or by kinesthetic guidance of the robot.
+
+The `dataset` object must be formatted as follows:
+```
+    n : int
+          state space dimensionality
+    a : int
+          action space dimensionality
+    t : int
+          number of state transitions
+
+    dataset : dict,
+          object containing offline-collected trajectories
+
+    dataset['observations'] : ndarray
+          2D array (t, n) containing the current state information for each timestep
+
+    dataset['next_observations'] : ndarray
+          2D array (t, n) containing the next-state information for each timestep
+
+    dataset['actions'] : ndarray
+          2D array (t, a) containing the action commanded to the agent at the current timestep
+
+    dataset['terminals'] : ndarray
+          1D array (t,) of booleans indicating whether or not the current state transition is terminal (ends the episode)
+```
 ### 2. Dynamics Parameters Inference
+We offer two distinct methods for inferring the dynamics parameters:
+
+1. **ResetFree-DROPO** (**RF-DROPO**): Our proprietary method, developed as an extension of [DROPO](https://github.com/gabrieletiboni/dropo). In this approach, we relax the original assumption of resetting the simulator to each visited real-world state. Instead, we consider that we only know the initial full configuration of the environment, and actions are replayed in an open-loop fashion, always starting from the initial state configuration. For further details, please refer to Sec. IV-A in our [paper](https://arxiv.org/abs/2303.04136).
+
+2. **[BayesSim](https://github.com/rafaelpossas/bayes_sim/tree/master)**: This method represents the classical baseline in Domain Randomization, adapted here to the offline inference setting by replaying the original action sequence during data collection.
+
+Both of these methods are accessible within the `sb3-gym-soro/methods directory`.
 ### 3. Policy Training
 ### 4. Evaluation
 
