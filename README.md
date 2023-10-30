@@ -123,19 +123,19 @@ env.set_dr_training(False)
 
 ## Examples
 ### TrunkReach
-Inference 
-Policy Training
-Evaluation
+- Inference 
+- Policy Training
+- Evaluation
 ### TrunkPush
-Inference 
-Policy Training
-Evaluation
+- Inference 
+- Policy Training
+- Evaluation
 ### TrunkLift 
-Policy Training - fixed DR
-Evaluation
+- Policy Training - fixed DR
+- Evaluation
 ### Multigait 
-Policy Training - fixed DR
-Evaluation
+- Policy Training - fixed DR
+- Evaluation
 
 ## Citing
 If you use this repository, please consider citing us:
