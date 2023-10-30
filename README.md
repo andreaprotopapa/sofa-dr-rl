@@ -5,22 +5,11 @@ This repository contains the code for the [paper](https://arxiv.org/abs/2303.041
 [Preprint](https://arxiv.org/abs/2303.04136) / [Website](https://andreaprotopapa.github.io/dr-soro/) / [Video](https://andreaprotopapa.github.io/dr-soro/)
 
 ## Abstract
-Soft robots are gaining popularity due to their safety and
-adaptability, and the SOFA Framework plays a crucial role in this field
-by enhancing soft robot modeling and simulation. However, the complexity
-of modeling, often approximated, challenges the efficacy of reinforcement
-learning (RL) in real-world scenarios due to a significant domain
-gap between simulated models and physical platforms. In this work, by
-leveraging SOFA simulation platform, we demonstrate how Domain Randomization
-(DR) can improve RL policies for soft robots with: i) robustness
-w.r.t. unknown dynamics parameters; ii) reduced training time by
-exploiting drastically simpler dynamic models for learning. Moreover, we
-introduce an algorithmic extension for offline adaptive domain randomization
-for sim-to-real transfer of soft-robot policies. Our method accurately
-infers complex dynamics parameters and trains robust policies that
-transfer to the target domain, especially for contact-reach tasks like cube
-manipulation. All DR-compatible benchmark tasks and our method’s implementation
-are available as an easy-to-use extension of [SofaGym framework](https://github.com/SofaDefrost/SofaGym).
+Soft robots are gaining popularity due to their safety and adaptability, and the SOFA Framework plays a crucial role in this field by enhancing soft robot modeling and simulation. However, modeling complexity, often approximated, challenges the efficacy of reinforcement learning (RL) in real-world scenarios due to a significant domain gap between simulations and physical platforms.
+
+In this work, we leverage the [SOFA simulation platform](https://github.com/sofa-framework/sofa) to demonstrate how Domain Randomization (DR) enhances RL policies for soft robots. Our approach improves robustness against unknown dynamics parameters and drastically reduces training time by using simplified dynamic models. We introduce an algorithmic extension for offline adaptive domain randomization (RF-DROPO) to facilitate sim-to-real transfer of soft-robot policies. Our method accurately infers complex dynamics parameters and trains robust policies that transfer to the target domain, especially for contact-reach tasks like cube manipulation. 
+
+All DR-compatible benchmark tasks and our method's implementation are accessible as a user-friendly extension of the [SofaGym](https://github.com/SofaDefrost/SofaGym) framework. This software toolkit includes essential elements for applying Domain Randomization to any SOFA scene within a [Gym](https://github.com/openai/gym) environment, using the [Stable Baselines3](https://github.com/DLR-RM/stable-baselines3) (SB3) library for Reinforcement Learning training, allowing for the creation of multiparametric Sofa scenes and training control policies capable of achieving Sim2Real transfer. Example scenes are provided to guide users in effectively incorporating SOFA simulations and training learning algorithms.
 
 <p align="center">
   <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/670be649-b3fa-4b34-b715-41d4ad8688b4 alt="Offline Adaptive DR paradigm for soft robots." width="700"/>
