@@ -185,6 +185,7 @@ For this task, we offer various methods for training with Domain Randomization, 
     python test.py --test_env trunk-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunk/RFDROPO/2023_02_28_20_31_32_trunk-v0_ppo_t2000000_seed2_login027851592_TM84F --test_render
     ```
 ### TrunkPush
+- For this task, it is also possible to train on an unmodeled setting, by using the option `--unmodeled`, which referers to the use of a different randomized configuration file (i.e., `TrunkCube_random_unmodeled_config.json`).
 - **Inference**
   -  Dataset has here been pre-collected by a semi-converged policy and is simply loaded.
   - ```
