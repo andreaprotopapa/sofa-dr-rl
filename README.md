@@ -117,9 +117,10 @@ env.set_dr_training(False)
 
 ## Details
 ### Randomized configuration of the Gym environment
-### Inference
-### Policy Training
-### Evaluation
+### 1. Dataset collection and formatting
+### 2. Dynamics Parameters Inference
+### 3. Policy Training
+### 4. Evaluation
 
 ## Examples
 ### TrunkReach
