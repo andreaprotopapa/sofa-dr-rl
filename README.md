@@ -9,7 +9,7 @@ Soft robots are gaining popularity due to their safety and adaptability, and the
 
 In this work, we leverage the [SOFA simulation platform](https://github.com/sofa-framework/sofa) to demonstrate how Domain Randomization (DR) enhances RL policies for soft robots. Our approach improves robustness against unknown dynamics parameters and drastically reduces training time by using simplified dynamic models. We introduce an algorithmic extension for offline adaptive domain randomization (RF-DROPO) to facilitate sim-to-real transfer of soft-robot policies. Our method accurately infers complex dynamics parameters and trains robust policies that transfer to the target domain, especially for contact-reach tasks like cube manipulation. 
 
-All DR-compatible benchmark tasks and our method's implementation are accessible as a user-friendly extension of the [SofaGym](https://github.com/SofaDefrost/SofaGym) framework. This software toolkit includes essential elements for applying Domain Randomization to any SOFA scene within a [Gym](https://github.com/openai/gym) environment, using the [Stable Baselines3](https://github.com/DLR-RM/stable-baselines3) (SB3) library for Reinforcement Learning training, allowing for the creation of multiparametric Sofa scenes and training control policies capable of achieving Sim2Real transfer. Example scenes are provided to guide users in effectively incorporating SOFA simulations and training learning algorithms.
+All DR-compatible benchmark tasks and our method's implementation are accessible as a user-friendly extension of the [SofaGym](https://github.com/SofaDefrost/SofaGym) framework. This software toolkit includes essential elements for applying Domain Randomization to any SOFA scene within a [Gym](https://github.com/openai/gym) environment, using the [Stable Baselines3](https://github.com/DLR-RM/stable-baselines3) (SB3) library for Reinforcement Learning training, allowing for the creation of multiparametric SOFA scenes and training control policies capable of achieving Sim2Real transfer. Example scenes are provided to guide users in effectively incorporating SOFA simulations and training learning algorithms.
 
 <p align="center">
   <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/670be649-b3fa-4b34-b715-41d4ad8688b4 alt="Offline Adaptive DR paradigm for soft robots." width="700"/>
@@ -67,6 +67,47 @@ For example, if you have installed SOFA binaries, you should launch something si
 ```python
 export SOFA_ROOT=/home/andreaprotopapa/SOFA/v22.06.00
 export PYTHONPATH=/home/andreaprotopapa/SOFA/v22.06.00/plugins/SofaPython3/lib/python3/site-packages:$PYTHONPATH
+```
+This software toolkit is organized in two main parts, described as follows:
+- **sb3-gym-soro** contains all the code for RL training algorithms, with the use of Domain Randomization techinques. 
+Work inside this directory for any experiment and test.
+- **sofagym** contains the API provided by [SofaGym](https://github.com/SofaDefrost/SofaGym) for creating standard Gym enviroments for Soft Robots interfaced with the SOFA simulator. This toolkit has been extended for integrating Domain Randomization techinques.
+
+See below for more examples on testing the toolkit, in the [Examples section](https://github.com/andreaprotopapa/sofa-dr-rl/tree/main#examples).
+
+### Features
+- Gym environments for Soft Robots with Domain Randomization support: *TrunkReach*, *TrunkPush*, *TrunkLift*, and *Multigait*
+  - Unmodeled variant for each the TrunkPush
+- DR parametric distributions: uniform, normal, truncnormal
+- Automatic sampling of new dynamics when `env.reset()` is called
+  
+### Environments
+| Gym name          | task                                                             | dim $\xi$ | $\xi$                                                                                                    | unmodeled variant |
+|-------------------|------------------------------------------------------------------|-----------|----------------------------------------------------------------------------------------------------------|-------------------|
+|`trunk-v0`         | *TrunkReach*: reach a target goal position                       | 3         | Trunk Mass, Poisson Ratio, Young's Modulus                                                               | -                 |
+|`trunkcube-v0`     | *TrunkPush*: push a cube to a target goal position               | 5         | Cube Mass, Friction Coefficient, Trunk Mass, Poisson Ratio, Young's Modulus                              | yes               |
+|`trunkwall-v0`     | *TrunkLift*: lift a flat object in the presence of a nearby wall | 1         | Wall Position                                                                                            | -                 |
+|`multigaitrobot-v0`| *Multigait*: walking forward with the highest speed              | 3         | Multigait mass, PDMS Poisson Ratio, PDMS Young's Modulus, EcoFlex Poisson Ratio, EcoFlex Young's Modulus | -                 |
+
+
+where $\xi \in \mathbb{R}^{dim \ \xi}$ is the dynamics parameter vector. The unmodeled variants represent under-modeled parameterizations of the environments where dynamics parameters not included are misidentified by 20% (read more in Sec. V-B of our [work](https://arxiv.org/abs/2303.04136)).
+
+### Getting Started
+Inside  **sb3-gym-soro**, the workflow of each training pipeline follows this skeleton:
+```
+import gym
+from sofagym import *
+
+env = gym.make('trunkcube-v0')
+
+env.set_dr_distribution(dr_type='truncnorm', distr=[0.06, 0.004, 0.30, 0.0015, 0.52, 0.003, 0.45, 0.0004, 5557.07, 2.44])  # Randomize dynamics parameters following a truncated normal distribution
+env.set_dr_training(True)
+
+# ... train a policy
+
+env.set_dr_training(False)
+
+# ... evaluate policy in non-randomized env
 ```
 
 ## Examples
