@@ -20,8 +20,48 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
 
 ## Installation
 ### Requirements
-### Prerequisites
-### Install modules
+- [Python 3.8](https://www.python.org/downloads/release/python-3810/) +
+- Tested on:
+	- Ubuntu 20.04 with Python 3.8.10
+	- gcc-9, g++-9
+	- SOFA v22.06
+- For installing **SOFA v22.06**, you can choose between:
+  - [SOFA v22.06 binaries installation](https://github.com/sofa-framework/sofa/releases/tag/v22.06.00) (faster option)
+  - [Build and compile SOFA v22.06](https://www.sofa-framework.org/community/doc/getting-started/build/linux/) with mandatory plugins:
+    * [SofaPython3](https://github.com/sofa-framework/SofaPython3) (fetchable within sofa) 
+    * [BeamAdapter](https://github.com/sofa-framework/BeamAdapter) (fetchable within sofa)
+    * [SPLIB](https://github.com/SofaDefrost/SPLIB)
+    * [STLIB](https://github.com/SofaDefrost/STLIB)
+    * [SoftRobots](https://github.com/SofaDefrost/SoftRobots)
+    * [ModelOrderReduction](https://github.com/SofaDefrost/ModelOrderReduction)
+    * [Cosserat](https://github.com/SofaDefrost/plugin.Cosserat)
+    * Note: [Plugins installation](https://www.sofa-framework.org/community/doc/plugins/build-a-plugin-from-sources/#in-tree-build) with a in-tree build is preferred.
+
+### Install modules and requirements
+Mandatory:
+- You need both modules for using and testing our framework
+- **Install sofagym**
+```
+pip install -r sofagym/required_python_libs.txt
+pip install -e ./sofagym
+```
+- **Install sb3-gym-soro**
+```
+pip install -r sb3-gym-soro/required_python_libs.txt
+pip install -e ./sb3-gym-soro
+```
+Optionally:
+- If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
+- **RF-DROPO**
+```
+pip install -r sb3-gym-soro/methods/dropo-dev/required_python_libs.txt
+pip install -e ./sb3-gym-soro/methods/dropo-dev/
+```
+- **BayesSim**
+```
+pip install -r sb3-gym-soro/methods/bayessim-replay/required_python_libs.txt
+pip install -e ./sb3-gym-soro/methods/bayessim-replay/
+```
 
 ## Quick Start
 
