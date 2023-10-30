@@ -196,10 +196,11 @@ The primary objective of Domain Randomization is to randomly sample new dynamics
 
 Additionally, we have included another baseline method known as **Uniform Domain Randomization** (**UDR**). Unlike the aforementioned inference-based approaches, UDR does not require an inference step, as $p_\phi(\xi)$ is a uniform distribution that is statically fixed in the randomized configuration file of the environment.
 
-Upon training the agent in the source environment for a specified number of `timesteps`, the optimal policy is obtained as output and is saved in best_model.zip."
+Upon training the agent in the source environment for a specified number of `timesteps`, the optimal policy is obtained as output and is saved in `best_model.zip`.
 
 ### 4. Evaluation
-For evaluating the goodness of the various methods
+To evaluate the effectiveness of various methods in a Sim-to-Real setting, it is common practice to start with a Sim-to-Sim scenario. This allows us to test the transferability of learned policies using simulation alone. To do this, we initially worked in a source environment where the dynamics parameters were unknown. Our aim was to estimate an optimal policy that would be suitable for the unknown target domain.
+Subsequently, we can now evaluate the learned policy by applying it to a target simulated environment with the nominal target dynamics parameters that we attempted to infer during the inference phase.
 
 ## Examples
 Notes:
