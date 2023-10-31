@@ -47,6 +47,7 @@ Our toolkit currently works with `gym` v0.21.0 and `stable-baselines3` v1.6.2.
 **Mandatory** - You need to install python packages and the `sofagym` module for using and testing our framework:
 ```
 pip install setuptools==65.5.0 "wheel<0.40.0"
+pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
 pip install -r ./required_python_libs.txt
 pip install -e ./sofagym
 ```
@@ -303,6 +304,9 @@ We found that Domain Randomization is effective in enhancing robustness during t
   - ```
     python test.py --test_env multigaitrobot-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/multigait/2023_02_07_08_37_02_multigaitrobot-v0_ppo_t341000_seed1_hactarlogin358482_X54NP --test_render
     ```
+## Troubleshooting
+- If you are using a conda environment to run this tooolkit, you may fail in some errors with OpenGL libraries (e.g., `libGL error`). In this case you can try to install `conda install -c conda-forge libstdcxx-ng` or follow [this guide](https://stackoverflow.com/questions/72110384/libgl-error-mesa-loader-failed-to-open-iris) for more troubleshooting.
+
 ## Citing
 If you use this repository, please consider citing us:
 
