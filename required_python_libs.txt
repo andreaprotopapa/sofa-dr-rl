@@ -1,4 +1,6 @@
 # pip install -r required_python_libs.txt
+setuptools==65.5.0
+wheel==0.38.0
 numpy
 scipy
 matplotlib
@@ -20,3 +22,4 @@ pygame
 glfw
 pyopengl
 imageio
+imageio-ffmpeg

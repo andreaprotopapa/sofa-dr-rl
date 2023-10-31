@@ -16,7 +16,11 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
 </p>
 
 ## Table of Contents
-...
+1. [Installation](#installation)
+2. [Quick Start](#quick-start)
+3. [Details](#details)
+4. [Examples](#examples)
+5. [Citing](#citing)
 
 ## Installation
 ### Requirements
@@ -62,8 +66,8 @@ pip install -e ./sb3-gym-soro/methods/bayessim-replay
 ## Quick Start
 To make SofaGym able to run SOFA, you need to set some enviromental variables:
 ```python
-export SOFA_ROOT=<path>/<to>/<sofa>/<build>
 export PYTHONPATH=<path>/<to>/<python3>/<site-packages>:$PYTHONPATH
+export SOFA_ROOT=<path>/<to>/<sofa>/<build>
 ```
 For example, if you have installed SOFA binaries, you should launch something similar to:
 ```python
@@ -155,9 +159,52 @@ Each Gym environment is defined inside `sofagym`, as an extension of pre-existin
     - the physical bounds (`_lowest` and `_highest`)
 
 ### 1. Dataset collection and formatting
+Prior to running the code for the *inference* phase, an offline dataset of trajectories from the target (real) environment needs to be collected. This dataset can be generated either by rolling out any previously trained policy, or by kinesthetic guidance of the robot.
+
+The `dataset` object must be formatted as follows:
+```
+    n : int
+          state space dimensionality
+    a : int
+          action space dimensionality
+    t : int
+          number of state transitions
+
+    dataset : dict,
+          object containing offline-collected trajectories
+
+    dataset['observations'] : ndarray
+          2D array (t, n) containing the current state information for each timestep
+
+    dataset['next_observations'] : ndarray
+          2D array (t, n) containing the next-state information for each timestep
+
+    dataset['actions'] : ndarray
+          2D array (t, a) containing the action commanded to the agent at the current timestep
+
+    dataset['terminals'] : ndarray
+          1D array (t,) of booleans indicating whether or not the current state transition is terminal (ends the episode)
+```
 ### 2. Dynamics Parameters Inference
+We offer two distinct methods for inferring the dynamics parameters:
+
+1. **ResetFree-DROPO** (**RF-DROPO**): Our proprietary method, developed as an extension of [DROPO](https://github.com/gabrieletiboni/dropo). In this approach, we relax the original assumption of resetting the simulator to each visited real-world state. Instead, we consider that we only know the initial full configuration of the environment, and actions are replayed in an open-loop fashion, always starting from the initial state configuration. For further details, please refer to Sec. IV-A in our [paper](https://arxiv.org/abs/2303.04136).
+
+2. **[BayesSim](https://github.com/rafaelpossas/bayes_sim/tree/master)**: This method represents the classical baseline in Domain Randomization, adapted here to the offline inference setting by replaying the original action sequence during data collection.
+
+Both of these methods are accessible within the `sb3-gym-soro/methods` directory.
+As the output, we generate a distribution of the dynamics parameters saved in an `.npy` file. You can refer to the `sb3-gym-soro/BestBounds` directory to access previous inference results that we have made available.
+
 ### 3. Policy Training
+The primary objective of Domain Randomization is to randomly sample new dynamics parameters, denoted as $\xi$, from the distribution $p_\phi(\xi)$ at the beginning of each training episode. If an inference algorithm like *RF-DROPO* or *BayesSim* has been used, then $p_\phi(\xi)$ represents the output from the previous step.
+
+Additionally, we have included another baseline method known as **Uniform Domain Randomization** (**UDR**). Unlike the aforementioned inference-based approaches, UDR does not require an inference step, as $p_\phi(\xi)$ is a uniform distribution that is statically fixed in the randomized configuration file of the environment.
+
+Upon training the agent in the source environment for a specified number of `timesteps`, the optimal policy is obtained as output and is saved in `best_model.zip`.
+
 ### 4. Evaluation
+To evaluate the effectiveness of various methods in a Sim-to-Real setting, it is common practice to start with a Sim-to-Sim scenario. This allows us to test the transferability of learned policies using simulation alone. To do this, we initially worked in a source environment where the dynamics parameters were unknown. Our aim was to estimate an optimal policy that would be suitable for the unknown target domain.
+Subsequently, we can now evaluate the learned policy by applying it to a target simulated environment with the nominal target dynamics parameters that we attempted to infer during the inference phase.
 
 ## Examples
 Notes:
