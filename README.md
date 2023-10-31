@@ -236,8 +236,6 @@ For this task, we offer various methods for training with Domain Randomization, 
     ```
 ### TrunkPush
 
-![trunkcube](https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/63ce6f11-a743-4dbf-8c5a-0b5030d9184c)
-
 - For this task, it is also possible to train on an unmodeled setting, by using the option `--unmodeled`, which referers to the use of a different randomized configuration file (i.e., `TrunkCube_random_unmodeled_config.json`).
 - **Inference**
   -  Dataset has here been pre-collected by a semi-converged policy and is simply loaded.
