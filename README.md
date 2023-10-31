@@ -20,7 +20,8 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
 2. [Quick Start](#quick-start)
 3. [Details](#details)
 4. [Examples](#examples)
-5. [Citing](#citing)
+5. [Troubleshooting](#troubleshooting)
+6. [Citing](#citing)
 
 ## Installation
 ### Requirements
