@@ -67,11 +67,13 @@ pip install -e ./sb3-gym-soro/methods/bayessim-replay
 To make SofaGym able to run SOFA, you need to set some enviromental variables:
 ```python
 export PYTHONPATH=<path>/<to>/<python3>/<site-packages>:$PYTHONPATH
+export PYTHONPATH=<path>/<to>/<sofa-dr-rl>/sofagym/stlib3:$PYTHONPATH
 export SOFA_ROOT=<path>/<to>/<sofa>/<build>
 ```
 For example, if you have installed SOFA binaries, you should launch something similar to:
 ```python
 export PYTHONPATH=~/SOFA/v22.06.00/plugins/SofaPython3/lib/python3/site-packages:$PYTHONPATH
+export PYTHONPATH=~/code/sofa-dr-rl/sofagym/stlib3:$PYTHONPATH
 export SOFA_ROOT=~/SOFA/v22.06.00
 ```
 This software toolkit is organized in two main parts, described as follows:
