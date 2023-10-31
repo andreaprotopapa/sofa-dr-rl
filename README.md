@@ -218,6 +218,11 @@ Notes:
   - During the evaluation of a learned policy, it is possible to visualize the execution of the task with the option `--test_render`.
 - Additionally, the datasets and distributions of dynamics parameters that have already been inferred are provided in the `sb3-gym-soro/Dataset` and `sb3-gym-soro/BestBounds` directories, respectively.
 ### TrunkReach
+
+<p align="center">
+  <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/47170f5d-9b51-48db-9f42-0e61ff083476 alt="trunkreach" width="400"/>
+</p>
+
 For this task, we offer various methods for training with Domain Randomization, including *RF-DROPO* (our method), *BayesSim*, and *UDR*. To keep it simple, we will provide example commands for *RF-DROPO* here. However, you can refer to the in-code documentation of each method if you wish to try them as well.
 - **Inference**
   - Dataset is here collected by executing a set of 100 random actions before the inference phase.
@@ -236,6 +241,10 @@ For this task, we offer various methods for training with Domain Randomization, 
     ```
 ### TrunkPush
 
+<p align="center">
+  <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/87781dcb-ca14-487e-b276-f47795910501 alt="trunkpush" width="400"/>
+</p>
+
 - For this task, it is also possible to train on an unmodeled setting, by using the option `--unmodeled`, which referers to the use of a different randomized configuration file (i.e., `TrunkCube_random_unmodeled_config.json`).
 - **Inference**
   -  Dataset has here been pre-collected by a semi-converged policy and is simply loaded.
@@ -253,6 +262,11 @@ For this task, we offer various methods for training with Domain Randomization, 
     python test.py --test_env trunkcube-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunkcube/RFDROPO/2023_07_10_11_34_58_trunkcube-v0_ppo_t2000000_seed1_7901a3c94a22_G0QXG --test_render
     ```
 ### TrunkLift 
+
+<p align="center">
+  <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/78eb23cf-9a8d-4d48-91d1-c818576f3748 alt="trunklift" width="400"/>
+</p>
+
 - For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomizing the wall position during training (as defined in the corresponding `TrunkWall_random_config.json`). Read more in Sec. V-D of our [work](https://arxiv.org/abs/2303.04136) for further details.
 - **Policy Training - fixed DR**
 - ```
@@ -264,6 +278,12 @@ For this task, we offer various methods for training with Domain Randomization, 
     python test.py --test_env trunkwall-v0 --test_episodes 1 --seed 0 --offline --load_path ./example-results/trunkwall/2023_02_26_20_46_59_trunkwall-v0_ppo_t2000000_seed3_mn011935323_R922D --test_render
     ```
 ### Multigait 
+
+<p align="center">
+  <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/0cf97be8-c4b3-4dd7-9d62-a9d897428499 alt="multi-red" width="400"/>
+  <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/61cb8f3b-04a6-4d7c-bda3-29c070ff0711 alt="multi-compl" width="400"/>
+</p>
+
 - For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomization (as defined in the corresponding `MultiGaitRobot_random_config.json`) during training using a simplified model
 to then evaluate the performance on a more complex version of model.
   - We found that Domain Randomization is effective in enhancing robustness during training. This approach allows us to reduce the training time by utilizing simplified models for training while still achieving successful transfer of learned behavior to more accurate models during evaluation.
