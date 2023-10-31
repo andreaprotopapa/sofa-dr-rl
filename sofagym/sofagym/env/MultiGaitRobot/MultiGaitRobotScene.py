@@ -61,6 +61,7 @@ def add_plugins(rootNode):
     rootNode.addObject('RequiredPlugin', name="SofaLoader")
     rootNode.addObject('RequiredPlugin', name="SofaMeshCollision")
     rootNode.addObject('RequiredPlugin', name="SofaGeneralLoader")
+    rootNode.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
     return rootNode
 
 def add_visuals_and_solvers(rootNode, config, visu, simu, frictionCoeff=0.7):
@@ -77,7 +78,7 @@ def add_visuals_and_solvers(rootNode, config, visu, simu, frictionCoeff=0.7):
         spotLoc = [0, 0, 1000]
         rootNode.addObject("SpotLight", position=spotLoc, direction=[0, 0.0, -1.0])
         rootNode.addObject("InteractiveCamera", name="camera", position=source, lookAt=target, zFar=500)
-        rootNode.addObject('BackgroundSetting', color='0 0.168627 0.211765')
+        #rootNode.addObject('BackgroundSetting', color='0 0.168627 0.211765')
         #rootNode.addObject('OglSceneFrame', style="Arrows", alignment="TopRight")
     
     if simu:

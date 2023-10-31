@@ -44,6 +44,8 @@ def add_plugins(rootNode):
     rootNode.addObject('RequiredPlugin', name="SofaMiscFem")
     rootNode.addObject('RequiredPlugin', name="SofaSimpleFem")
     rootNode.addObject('RequiredPlugin', name="SofaRigid")
+    rootNode.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+    
     return rootNode
 
 def add_visuals_and_solvers(root, config, visu, simu, fricionCoeff):
@@ -60,7 +62,7 @@ def add_visuals_and_solvers(root, config, visu, simu, fricionCoeff):
         spotLoc = [2*source[0], 0, 0]
         root.addObject("SpotLight", position=spotLoc, direction=[-np.sign(source[0]), 0.0, 0.0])
         root.addObject("InteractiveCamera", name='camera', position=source, lookAt=target, zFar=500)
-        root.addObject('BackgroundSetting', color=[1, 1, 1, 1])
+        #root.addObject('BackgroundSetting', color=[1, 1, 1, 1])
     if simu:
         root.addObject('DefaultPipeline', draw=False, depth=6, verbose=False)
         root.addObject('FreeMotionAnimationLoop')
