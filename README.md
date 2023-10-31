@@ -31,10 +31,10 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
 	- SOFA v22.06
 - For installing **SOFA v22.06**, you can choose between:
   - [SOFA v22.06 binaries installation](https://github.com/sofa-framework/sofa/releases/tag/v22.06.00) (faster option)
-  - [Build and compile SOFA v22.06](https://www.sofa-framework.org/community/doc/getting-started/build/linux/) with mandatory plugins:
+  - [Build and compile SOFA v22.06](https://www.sofa-framework.org/community/doc/getting-started/build/linux/)
+- Mandatory plugins:
     * [SofaPython3](https://github.com/sofa-framework/SofaPython3) (fetchable within sofa) 
     * [BeamAdapter](https://github.com/sofa-framework/BeamAdapter) (fetchable within sofa)
-    * [SPLIB](https://github.com/SofaDefrost/SPLIB)
     * [STLIB](https://github.com/SofaDefrost/STLIB)
     * [SoftRobots](https://github.com/SofaDefrost/SoftRobots)
     * [ModelOrderReduction](https://github.com/SofaDefrost/ModelOrderReduction)
@@ -46,6 +46,7 @@ Our toolkit currently works with `gym` v0.21.0 and `stable-baselines3` v1.6.2.
 
 **Mandatory** - You need to install python packages and the `sofagym` module for using and testing our framework:
 ```
+pip install setuptools==65.5.0 "wheel<0.40.0"
 pip install -r ./required_python_libs.txt
 pip install -e ./sofagym
 ```
@@ -67,11 +68,13 @@ pip install -e ./sb3-gym-soro/methods/bayessim-replay
 To make SofaGym able to run SOFA, you need to set some enviromental variables:
 ```python
 export PYTHONPATH=<path>/<to>/<python3>/<site-packages>:$PYTHONPATH
+export PYTHONPATH=<path>/<to>/<sofa-dr-rl>/sofagym/stlib3:$PYTHONPATH
 export SOFA_ROOT=<path>/<to>/<sofa>/<build>
 ```
 For example, if you have installed SOFA binaries, you should launch something similar to:
 ```python
 export PYTHONPATH=~/SOFA/v22.06.00/plugins/SofaPython3/lib/python3/site-packages:$PYTHONPATH
+export PYTHONPATH=~/code/sofa-dr-rl/sofagym/stlib3:$PYTHONPATH
 export SOFA_ROOT=~/SOFA/v22.06.00
 ```
 This software toolkit is organized in two main parts, described as follows:
