@@ -33,8 +33,8 @@ All DR-compatible benchmark tasks and our method's implementation are accessible
   - [SOFA v22.06 binaries installation](https://github.com/sofa-framework/sofa/releases/tag/v22.06.00) (faster option)
   - [Build and compile SOFA v22.06](https://www.sofa-framework.org/community/doc/getting-started/build/linux/)
 - Mandatory plugins:
-    * [SofaPython3](https://github.com/sofa-framework/SofaPython3) (fetchable within sofa) 
-    * [BeamAdapter](https://github.com/sofa-framework/BeamAdapter) (fetchable within sofa)
+    * [SofaPython3](https://github.com/sofa-framework/SofaPython3)
+    * [BeamAdapter](https://github.com/sofa-framework/BeamAdapter)
     * [STLIB](https://github.com/SofaDefrost/STLIB)
     * [SoftRobots](https://github.com/SofaDefrost/SoftRobots)
     * [ModelOrderReduction](https://github.com/SofaDefrost/ModelOrderReduction)
