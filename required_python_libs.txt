@@ -4,7 +4,7 @@ scipy
 matplotlib
 pandas
 gym==0.21.0
-torch
+#torch
 wandb
 stable-baselines3==1.6.2
 bayesian-optimization
