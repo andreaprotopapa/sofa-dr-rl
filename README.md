@@ -246,7 +246,10 @@ For this task, we offer various methods for training with Domain Randomization, 
   <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/87781dcb-ca14-487e-b276-f47795910501 alt="trunkpush" width="400"/>
 </p>
 
-- For this task, it is also possible to train on an unmodeled setting, by using the option `--unmodeled`, which referers to the use of a different randomized configuration file (i.e., `TrunkCube_random_unmodeled_config.json`).
+For this task, we offer various methods for training with Domain Randomization, including *RF-DROPO* (our method), *BayesSim*, and *UDR*. To keep it simple, we will provide example commands for *RF-DROPO* here. However, you can refer to the in-code documentation of each method if you wish to try them as well.
+
+It is also possible to train on an unmodeled setting, by using the option `--unmodeled`, which referers to the use of a different randomized configuration file (i.e., `TrunkCube_random_unmodeled_config.json`).
+
 - **Inference**
   -  Dataset has here been pre-collected by a semi-converged policy and is simply loaded.
   - ```
@@ -268,7 +271,8 @@ For this task, we offer various methods for training with Domain Randomization, 
   <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/78eb23cf-9a8d-4d48-91d1-c818576f3748 alt="trunklift" width="400"/>
 </p>
 
-- For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomizing the wall position during training (as defined in the corresponding `TrunkWall_random_config.json`). Read more in Sec. V-D of our [work](https://arxiv.org/abs/2303.04136) for further details.
+For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomizing the wall position during training (as defined in the corresponding `TrunkWall_random_config.json`). Read more in Sec. V-D of our [work](https://arxiv.org/abs/2303.04136) for further details.
+
 - **Policy Training - fixed DR**
 - ```
     python train.py --env trunkwall-v0 --algo ppo --now 1 --seed 0 -t 2000000 --run_path ./runs/trunkwall --wandb_mode disabled
@@ -285,12 +289,12 @@ For this task, we offer various methods for training with Domain Randomization, 
   <img src=https://github.com/andreaprotopapa/sofa-dr-rl/assets/44071949/61cb8f3b-04a6-4d7c-bda3-29c070ff0711 alt="multi-compl" width="400"/>
 </p>
 
-- For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomization (as defined in the corresponding `MultiGaitRobot_random_config.json`) during training using a simplified model
-to then evaluate the performance on a more complex version of model.
-  - We found that Domain Randomization is effective in enhancing robustness during training. This approach allows us to reduce the training time by utilizing simplified models for training while still achieving successful transfer of learned behavior to more accurate models during evaluation.
-  - Read more in Sec. V-C of our [work](https://arxiv.org/abs/2303.04136) for further details.
+For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomization (as defined in the corresponding `MultiGaitRobot_random_config.json`) during training using a simplified model to then evaluate the performance on a more complex version of model.
+
+We found that Domain Randomization is effective in enhancing robustness during training. This approach allows us to reduce the training time by utilizing simplified models for training while still achieving successful transfer of learned behavior to more accurate models during evaluation. Read more in Sec. V-C of our [work](https://arxiv.org/abs/2303.04136) for further details.
+    
 - **Policy Training - fixed DR**
-- ```
+  - ```
     python train_fixed_dr.py --env multigaitrobot-v0 --test_env multigaitrobot-v0 --eval_freq 12000 --seed 0 --now 1 -t 500000 --run_path ./runs/multigait --bounds_path ./BestBounds/MultiGait/gauss_bounds.npy --distribution_type truncnorm --wandb_mode disabled
     ```
 - **Evaluation** (suggested for an out-of-the-box testing)
