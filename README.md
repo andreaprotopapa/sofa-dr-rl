@@ -93,7 +93,7 @@ See below for more examples on testing the toolkit, in the [Examples section](ht
 
 ### Features
 - Gym environments for Soft Robots with Domain Randomization support: *TrunkReach*, *TrunkPush*, *TrunkLift*, and *Multigait*
-  - Unmodeled variant for each the *TrunkPush*
+  - Unmodeled variant for the *TrunkPush* environment
 - DR parametric distributions: uniform, normal, truncnormal
 - Automatic sampling of new dynamics when `env.reset()` is called
 - DR inference methods: *RF-DROPO*, *BayesSim*
