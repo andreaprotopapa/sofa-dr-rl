@@ -274,7 +274,7 @@ It is also possible to train on an unmodeled setting, by using the option `--unm
 For this example, we did not perform the inference of dynamics parameter distributions. Our focus was on examining the impact of randomizing the wall position during training (as defined in the corresponding `TrunkWall_random_config.json`). Read more in Sec. V-D of our [work](https://arxiv.org/abs/2303.04136) for further details.
 
 - **Policy Training - fixed DR**
-- ```
+  - ```
     python train.py --env trunkwall-v0 --algo ppo --now 1 --seed 0 -t 2000000 --run_path ./runs/trunkwall --wandb_mode disabled
     ```
 - **Evaluation** (suggested for an out-of-the-box testing)
