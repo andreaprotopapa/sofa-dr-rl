@@ -148,7 +148,6 @@ Each Gym environment is defined inside `sofagym`, as an extension of pre-existin
 "dynamic_params": ["trunkMass", "trunkPoissonRatio", "trunkYoungModulus"],
 "dynamic_params_values": [0.42, 0.45, 4500],
 
-"trunkMass_init": 0.42,
 "trunkMass_min_search": 0.005,
 "trunkMass_max_search": 1.0,
 "trunkMass_lowest": 0.0001,
@@ -160,7 +159,6 @@ Each Gym environment is defined inside `sofagym`, as an extension of pre-existin
   - For each dynamics parameter to be randomized, set:
     - the name (inside `dynamic_params`)
     - the target value (inside `dynamic_params_values`)
-    - the initial value (`_init`)
     - the search bounds (`_min_search` and `_max_search`)
     - the physical bounds (`_lowest` and `_highest`)
 
