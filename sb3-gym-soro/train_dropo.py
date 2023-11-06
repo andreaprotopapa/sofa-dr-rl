@@ -27,12 +27,13 @@ import json
 
 
 # import random_envs
-from dropo_dev import Dropo, denormalize
+from dropo_dev import Dropo
 from envs.RandomVecEnv import RandomSubprocVecEnv
 from utils.utils import *
 from policy.policy import Policy
 
 from sofagym import *
+import denormalize
 
 
 
