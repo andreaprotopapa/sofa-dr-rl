@@ -33,6 +33,7 @@ from utils.utils import *
 from policy.policy import Policy
 
 from sofagym import *
+import denormalize
 
 
 
@@ -185,6 +186,16 @@ def main():
         print("\nLoading best bounds from ", args.bounds_path)
         best_phi = list(np.load(args.bounds_path))
 
+        if not args.load_denormalized_bounds:
+            print('Normalized means and st.devs:\n---------------')
+            print(denormalize.pretty_print_bounds(env, best_phi),'\n')
+            best_phi = denormalize.denormalize_bounds(env, args.logstdevs, best_phi)
+            print('Denormalized means and st.devs:\n---------------')
+            print(denormalize.pretty_print_bounds(env, best_phi),'\n')
+        else:
+            print('Denormalized means and st.devs:\n---------------')
+            print(denormalize.pretty_print_bounds(env, best_phi),'\n')
+
     wandb.run.summary["best_phi"] = best_phi
 
     if not args.inference_only:
@@ -326,6 +337,7 @@ def parse_args():
 
     parser.add_argument('--additive_variance', default=True, action='store_true', help='RECOMMENDED. Add value --epsilon to the diagonal of the cov_matrix to regularize the next-state distribution inference')
     parser.add_argument('--normalize', default=True, action='store_true', help='RECOMMENDED. Normalize dynamics search space to [0,4] as a regularization for CMA-ES.')
+    parser.add_argument('--load_denormalized_bounds', default=False, action='store_true', help='The loaded bounds are already denormalized for training phase.')
     parser.add_argument('--logstdevs', default=True, action='store_true', help='RECOMMENDED. Optimize stdevs in log space')
     parser.add_argument("--epsilon", "-eps", type=float, default=1.0e-5 , help="Epsilon hyperparameter. Valid only when additive_variance is set to True (default: 1e-3)")
     parser.add_argument('--scaling', default=False, action='store_true', help='Scaling each state dimension')
