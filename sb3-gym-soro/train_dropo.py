@@ -27,7 +27,7 @@ import json
 
 
 # import random_envs
-from dropo_dev import Dropo
+from dropo_dev import Dropo, denormalize
 from envs.RandomVecEnv import RandomSubprocVecEnv
 from utils.utils import *
 from policy.policy import Policy
@@ -184,6 +184,16 @@ def main():
         assert args.bounds_path is not None
         print("\nLoading best bounds from ", args.bounds_path)
         best_phi = list(np.load(args.bounds_path))
+
+        if args.normalize:
+            print('Normalized means and st.devs:\n---------------')
+            print(denormalize.pretty_print_bounds(env, best_phi),'\n')
+            best_phi = denormalize.denormalize_bounds(env, args.logstdevs, best_phi)
+            print('Denormalized means and st.devs:\n---------------')
+            print(denormalize.pretty_print_bounds(env, best_phi),'\n')
+        else:
+            print('Denormalized means and st.devs:\n---------------')
+            print(denormalize.pretty_print_bounds(env, best_phi),'\n')
 
     wandb.run.summary["best_phi"] = best_phi
 

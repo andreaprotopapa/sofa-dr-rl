@@ -510,10 +510,12 @@ class Dropo(object):
 			
 			params = ng.p.Tuple(*search_space_resumed)	
 
-		if resume:
 			print(f"Checkpoint loaded.\nResume inference from iteration n. {wandb.config.opt_iteration_i} - temperature {wandb.config.temperature}.")
 			print('Actual best means and st.devs:\n---------------')
-			print(self.pretty_print_bounds(self._denormalize_bounds([x.value for x in search_space_resumed])))
+			if normalize:
+				print(self.pretty_print_bounds(self._denormalize_bounds([x.value for x in search_space_resumed])))
+			else:
+				print(self.pretty_print_bounds([x.value for x in search_space_resumed]))
 
 		instru = ng.p.Instrumentation(phi=params,
 									  sample_size=sample_size,
