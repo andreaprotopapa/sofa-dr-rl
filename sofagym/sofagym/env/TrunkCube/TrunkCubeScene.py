@@ -285,12 +285,9 @@ def createScene(rootNode, config={"source": [-600.0, -25, 100],
                                   "target": [30, -25, 100],
                                   "goalPos": [0, 0, 0]}, mode='simu_and_visu'):
 
-    if config["unmodeled"]:
-        cube_trasl, cube_rot, cubeScale, trunkScale, trunkYoungModulus = utils_rand.set_initial_state_distr(config) # sample new random (or static) dynamics
-        cube_mass, frictionCoeff, trunkMass, trunkPoissonRatio= utils_rand.set_dynamic_params(config)
-    else:
-        cube_trasl, cube_rot, cubeScale, trunkScale = utils_rand.set_initial_state_distr(config) # sample new random (or static) dynamics
-        cube_mass, frictionCoeff, trunkMass, trunkPoissonRatio, trunkYoungModulus = utils_rand.set_dynamic_params(config)
+    initial_state_distr = dict(zip(config["initial_state_distr"], utils_rand.set_initial_state_distr(config))) # sample new fixed dynamics
+    dynamic_params = dict(zip(config["dynamic_params"], utils_rand.set_dynamic_params(config))) # sample new random dynamics
+    dynamic_params.update(initial_state_distr)
 
     # Chose the mode: visualization or computations (or both)
     visu, simu = False, False
@@ -301,7 +298,7 @@ def createScene(rootNode, config={"source": [-600.0, -25, 100],
 
     rootNode = add_plugins(rootNode)
 
-    rootNode = add_visuals_and_solvers(rootNode, config, visu, simu, frictionCoeff)
+    rootNode = add_visuals_and_solvers(rootNode, config, visu, simu, dynamic_params["frictionCoeff"])
 
     rootNode.dt.value = 0.01
 
@@ -315,7 +312,8 @@ def createScene(rootNode, config={"source": [-600.0, -25, 100],
         simulation.addObject('SparseLDLSolver', name='precond')
         simulation.addObject('GenericConstraintCorrection', solverName="precond")
         
-    trunk = Trunk(simulation, youngModulus=trunkYoungModulus, poissonRatio=trunkPoissonRatio, totalMass=trunkMass, scale=trunkScale, inverseMode=False)
+    trunk = Trunk(simulation, youngModulus=dynamic_params["trunkYoungModulus"], poissonRatio=dynamic_params["trunkPoissonRatio"], totalMass=dynamic_params["trunkMass"], scale=dynamic_params["trunkScale"], inverseMode=False)
+    
     rootNode.trunk = trunk
 
     # vizualize cable trackers
@@ -333,10 +331,10 @@ def createScene(rootNode, config={"source": [-600.0, -25, 100],
 
     cubeNode = CreateObject(simulation, name="Cube", surfaceMeshFileName="mesh/smCube27.obj", visu=visu, simu=simu, color=[1., 1., 0.],
                   isAStaticObject=False,
-                  translation=cube_trasl, 
-                  rotation=cube_rot,  
-                  totalMass=cube_mass, 
-                  uniformScale=cubeScale)
+                  translation=dynamic_params["cubeTranslation"], 
+                  rotation=dynamic_params["cubeRotation"],  
+                  totalMass=dynamic_params["cubeMass"], 
+                  uniformScale=dynamic_params["cubeScale"])
     
     goal_mo, goal_visu = add_goal_node(rootNode, config['goalPos'])
 
