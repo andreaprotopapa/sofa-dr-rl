@@ -53,12 +53,13 @@ pip install -r ./required_python_libs.txt
 pip install -e ./sofagym
 ```
 **Optional** - If you want to use a specific Domain Randomization algorithm different from Uniform Domain Randomization (UDR), you have to install it as follows:
-- **RF-DROPO**
+- **RF-DROPO** ([external repo](https://github.com/gabrieletiboni/rf-dropo))
 ```
-pip install -r ./sb3-gym-soro/methods/dropo-dev/required_python_libs.txt
-pip install -e ./sb3-gym-soro/methods/dropo-dev
+git clone https://github.com/gabrieletiboni/rf-dropo.git
+pip install -r ./rf-dropo/required_python_libs.txt
+pip install -e ./rf-dropo
 ```
-- **BayesSim**
+- **BayesSim** (internally deployed in `./sb3-gym-soro/methods`)
 ```
 pip install -r ./sb3-gym-soro/methods/bayessim-replay/delfi/required_python_libs.txt
 pip install -e ./sb3-gym-soro/methods/bayessim-replay/delfi
