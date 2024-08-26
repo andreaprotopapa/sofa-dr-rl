@@ -2,7 +2,7 @@
 
 This repository contains the code for the [paper](https://arxiv.org/abs/2303.04136) "**Domain Randomization for Robust, Affordable and Effective Closed-loop Control of Soft Robots**" (Gabriele Tiboni, Andrea Protopapa, Tatiana Tommasi, Giuseppe Averta - IROS2023), here presented as an easy-to-use extension for SofaGym and SOFA Framework.
 
-[Preprint](https://arxiv.org/abs/2303.04136) / [Website](https://andreaprotopapa.github.io/dr-soro/) / [Video](https://andreaprotopapa.github.io/dr-soro/)
+[Paper](https://ieeexplore.ieee.org/document/10342537) / [Preprint](https://arxiv.org/abs/2303.04136) / [Website](https://andreaprotopapa.github.io/dr-soro/) / [Video](https://andreaprotopapa.github.io/dr-soro/)
 
 ## Abstract
 Soft robots are gaining popularity due to their safety and adaptability, and the SOFA Framework plays a crucial role in this field by enhancing soft robot modeling and simulation. However, modeling complexity, often approximated, challenges the efficacy of reinforcement learning (RL) in real-world scenarios due to a significant domain gap between simulations and physical platforms.
@@ -311,13 +311,13 @@ We found that Domain Randomization is effective in enhancing robustness during t
 If you use this repository, please consider citing us:
 
 ```bibtex
-@misc{tiboni2023dr_soro,
-  doi = {10.48550/ARXIV.2303.04136},
-  title = {Domain Randomization for Robust, Affordable and Effective Closed-loop Control of Soft Robots},
-  author = {Tiboni, Gabriele and Protopapa, Andrea and Tommasi, Tatiana and Averta, Giuseppe},  
-  keywords = {Robotics (cs.RO), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},  
-  publisher = {arXiv},  
-  year = {2023}
+@inproceedings{tiboni2023domain,
+  title={Domain randomization for robust, affordable and effective closed-loop control of soft robots},
+  author={Tiboni, Gabriele and Protopapa, Andrea and Tommasi, Tatiana and Averta, Giuseppe},
+  booktitle={2023 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages={612--619},
+  year={2023},
+  organization={IEEE}
 }
 ```
 Also, consider to cite the original SofaGym work:
